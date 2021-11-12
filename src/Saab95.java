@@ -2,7 +2,7 @@ import java.awt.*;
 /**
  * A class of a car Saab95
  */
-public class Saab95 extends Car{
+public class Saab95 extends Car implements Transportable{
 
     /**
      * Turbo
