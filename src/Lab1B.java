@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * The class Lab1A
  */
-public class Lab1A {
+public class Lab1B {
     /**
      * An arrayList of Car
      */
