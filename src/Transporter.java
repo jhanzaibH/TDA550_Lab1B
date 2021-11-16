@@ -1,4 +1,5 @@
-public interface Transporter extends Loadable, Movable{
+
+public interface Transporter extends CanBeLoaded, Movable {
     /**
      * Transport loaded objects
      */
