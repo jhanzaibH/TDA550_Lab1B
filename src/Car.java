@@ -152,6 +152,11 @@ public abstract class Car implements Movable{ // the class can be abstract as ob
         return position;
     }
 
+    /**
+     * Set position
+     */
+    void setPosition(double[] position){ this.position = position;}
+    
     @Override
     public void move(){
         switch (direction) {

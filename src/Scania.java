@@ -3,17 +3,21 @@ import java.awt.*;
  * Class for Scania cars
  */
 public class Scania extends Car{
-
     /**
      * Degree that platform is lowered, between 0 and 70 degrees
      */
     protected double platformDegree;
+    /**
+     * Returns true if platform is closed
+     */
+    protected boolean platformClosed;
     /**
      * Creates a car of the type Saab95
      */
     public Scania(){
         super(2, Color.white,100,"Scania");
         platformDegree = 0;
+        platformClosed = true;
         stopEngine();
     }
 
@@ -32,18 +36,22 @@ public class Scania extends Car{
      * Heightens the platform
      */
     public void heighten(Double degree){
-        // TODO: is it -degree?
         if (platformDegree-degree >= 0) {
             platformDegree -= degree;
+        }
+        if (degree == 0) {
+            platformClosed = true;
         }
     }
     /**
      * Lowers the platform
      */
     public void lower(Double degree){
-        // TODO: is it +degree?
-        if (platformDegree+degree <= 70) {
+        if (platformDegree+degree <= 70 && currentSpeed==0) {
             platformDegree += degree;
+        }
+        if (degree != 0) {
+            platformClosed = false;
         }
     }
     /**
@@ -51,11 +59,15 @@ public class Scania extends Car{
      */
     public void closePlatform(){
         platformDegree = 0;
+        platformClosed = true;
     }
     /**
      * Opens platform completely
      */
     public void openPlatform(){
-        platformDegree = 70;
+        if (currentSpeed == 0) {
+            platformDegree = 70;
+            platformClosed = false;
+        }
     }
 }

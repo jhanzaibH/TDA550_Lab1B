@@ -8,6 +8,10 @@ public class Saab95 extends Car implements Transportable{
      * Turbo
      */
     protected boolean turboOn;
+    /**
+     * Shows if the car is transported
+     */
+    protected boolean currentlyTransported;
 
     /**
      * Creates a car of the type Saab95
@@ -15,6 +19,7 @@ public class Saab95 extends Car implements Transportable{
     public Saab95(){
         super(2,Color.red,125,"Saab95");
         turboOn = false;
+        currentlyTransported = false;
         stopEngine();
     }
 
@@ -45,5 +50,14 @@ public class Saab95 extends Car implements Transportable{
         if (turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
     }
-
+    
+    // stuff from Transportable interface
+    @Override
+    public boolean getCurrentlyTransported(){
+        return currentlyTransported;
+    }
+    @Override
+    public void setCurrentlyTransported(Boolean bool){
+        currentlyTransported = bool;
+    }
 }
