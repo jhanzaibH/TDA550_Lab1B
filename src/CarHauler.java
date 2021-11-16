@@ -65,4 +65,19 @@ public class CarHauler extends Car implements Transporter, CanBeLoaded {
     public void unload(){
         if (!loadedCars.isEmpty()){ loadedCars.pop(); }
     }
+    public void openPlatform(){
+        scania.openPlatform();
+    }
+    public void closePlatform(){
+        scania.closePlatform();
+    }
+
+    @Override
+    public void move(){
+        scania.move();
+        for (Car car:loadedCars) {
+            car.setPosition(this.getPosition());
+        }
+    }
+
 }

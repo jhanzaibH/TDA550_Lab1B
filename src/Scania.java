@@ -70,4 +70,14 @@ public class Scania extends Car{
             platformClosed = false;
         }
     }
+
+    /**
+     * Moves the car if the platform is closed
+     */
+    @Override
+    public void move(){
+        if(platformClosed){
+            super.move();
+        }
+    }
 }
