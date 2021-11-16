@@ -23,7 +23,7 @@ public class Scania extends Car{
         return getEnginePower()*0.01;
     }
     /**
-     * Returns platfor degree
+     * Returns platform degree
      */
     public double getPlatformDegree() {
         return platformDegree;
