@@ -63,7 +63,7 @@ public class CarHauler extends Car implements Transporter, CanBeLoaded {
     // TODO: Check if the car or carhauler is moving
     @Override
     public void unload(){
-        if (!loadedCars.isEmpty()){ loadedCars.pop(); }
+        if (!scania.platformClosed && !loadedCars.isEmpty()){ loadedCars.pop(); }
     }
     public void openPlatform(){
         scania.openPlatform();
@@ -73,10 +73,12 @@ public class CarHauler extends Car implements Transporter, CanBeLoaded {
     }
 
     @Override
-    public void move(){
-        scania.move();
-        for (Car car:loadedCars) {
-            car.setPosition(this.getPosition());
+    public void move() {
+        if (scania.platformClosed) {
+            scania.move();
+            for (Car car : loadedCars) {
+                car.setPosition(this.getPosition());
+            }
         }
     }
 
