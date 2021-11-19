@@ -10,8 +10,7 @@ public interface CanBeLoaded {
     /**
      * Load loadable thing
      */
-    //TODO: make more extensible
-    <T extends Transportable> void load(T car);
+    void load(Car car);
 
     /**
      * Unload loadable thing

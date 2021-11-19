@@ -2,7 +2,7 @@ import java.awt.*;
 /**
  * A class of a car Saab95
  */
-public class Saab95 extends Car implements Transportable{
+public class Saab95 extends Car {
 
     /**
      * Turbo
@@ -21,6 +21,7 @@ public class Saab95 extends Car implements Transportable{
         turboOn = false;
         currentlyTransported = false;
         stopEngine();
+        size = 1000;
     }
 
     /**
@@ -58,6 +59,6 @@ public class Saab95 extends Car implements Transportable{
     }
     @Override
     public void setCurrentlyTransported(Boolean bool){
-        currentlyTransported = bool;
+        currentlyLoaded = bool;
     }
 }

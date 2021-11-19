@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * A class of a car Volvo240.
  */
-public class Volvo240 extends Car implements Transportable {
+public class Volvo240 extends Car {
 
     /**
      * The trim factor
@@ -19,8 +19,9 @@ public class Volvo240 extends Car implements Transportable {
      */
     public Volvo240() {
         super(4,Color.black,100,"Volvo240");
-        currentlyTransported = false;
+        currentlyLoaded = false;
         stopEngine();
+        size = 1000;
     }
 
     /**
@@ -38,11 +39,10 @@ public class Volvo240 extends Car implements Transportable {
 
     @Override
     public boolean getCurrentlyTransported(){
-        return currentlyTransported;
+        return currentlyLoaded;
     }
     @Override
     public void setCurrentlyTransported(Boolean bool) {
-        currentlyTransported = bool;
+        currentlyLoaded = bool;
     }
-
 }

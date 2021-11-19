@@ -20,10 +20,12 @@ public class Scania extends Car{
         platformClosed = true;
         stopEngine();
     }
-
+    @Override
+    public void startEngine(){
+        if (platformClosed) { currentSpeed = 0.1; }
+    }
     @Override
     protected double speedFactor() {
-        // TODO: other speed factor?
         return getEnginePower()*0.01;
     }
     /**
@@ -36,9 +38,10 @@ public class Scania extends Car{
      * Heightens the platform
      */
     public void heighten(Double degree){
-        if (platformDegree-degree >= 0) {
+        if (degree < 0){return;} // makes it impossible to heighten degree negatively
+        if (platformDegree-degree >= 0 && currentSpeed==0) {
             platformDegree -= degree;
-        }
+        } else { platformDegree = 0; }
         if (degree == 0) {
             platformClosed = true;
         }
@@ -47,9 +50,10 @@ public class Scania extends Car{
      * Lowers the platform
      */
     public void lower(Double degree){
+        if (degree < 0){return;} // makes it impossible to lower degree negatively
         if (platformDegree+degree <= 70 && currentSpeed==0) {
             platformDegree += degree;
-        }
+        } else { platformDegree = 70; }
         if (degree != 0) {
             platformClosed = false;
         }

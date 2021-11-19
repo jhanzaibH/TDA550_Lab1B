@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * Class for car transporting cars
  */
-public class CarHauler extends Car implements Transporter, CanBeLoaded {
+public class CarHauler extends Car implements CanBeLoaded {
     /**
      * Use Scania class for using common methods
      */
@@ -16,6 +16,10 @@ public class CarHauler extends Car implements Transporter, CanBeLoaded {
      */
     private Stack<Car> loadedCars;
     /**
+     * Maximum size of loaded cars
+     */
+    private int maxCarSize;
+    /**
      * Creates a car of the type Saab95
      */
     public CarHauler(){
@@ -24,46 +28,63 @@ public class CarHauler extends Car implements Transporter, CanBeLoaded {
         scania.closePlatform();
         loadedCars = new Stack<>();
         stopEngine();
+        size = 10000;
+        maxCarSize = 1500;
+    }
+    @Override
+    public void startEngine(){
+        scania.startEngine();
     }
 
     @Override
     protected double speedFactor() {
-        // TODO: other speed factor?
         return getEnginePower()*0.01;
     }
 
-    @Override
-    public void transport(){
-
+    public Car getLatestCar(){
+        return (!loadedCars.isEmpty()) ? loadedCars.peek() : null;
     }
-
 
     /**
      * If input is transportable car, load it on CarHauler
      */
-    // TODO: Check if the car or carHauler is moving. Change the interface
-    @Override
-    public <T extends Transportable> void load(T car){
-        if (distanceTo((Car)car) < loadingDistance && !scania.platformClosed){
-            loadedCars.add((Car) car);
-            ((Car)car).setPosition(this.getPosition());
+    public void load(Car car){
+        if (car.getSize()>maxCarSize || car.getCurrentlyLoaded()){
+            System.out.println("The car is too heavy or is loaded somewhere else");
+            return;
+        }
+        if (distanceTo(car) < loadingDistance && !scania.platformClosed && car.size <= maxCarSize){
+            loadedCars.add(car);
+            car.setPosition(this.getPosition());
+            car.setCurrentlyLoaded(true);
         }
         else {
-            //TODO: Change later
-            System.out.println("Car too far away");
+            System.out.println("Car too far away, or platform closed");
         }
     }
     /**
      * Distance between Car Hauler and a car
      */
-    private double distanceTo(Car car){
+    protected double distanceTo(Car car){
         return Math.sqrt(Math.pow(this.getPosition()[0] - car.getPosition()[0],2) + Math.pow(this.getPosition()[1] - car.getPosition()[1] ,2));
     }
 
-    // TODO: Check if the car or carhauler is moving
     @Override
     public void unload(){
-        if (!scania.platformClosed && !loadedCars.isEmpty()){ loadedCars.pop(); }
+        int distance = 5;
+        if (!scania.platformClosed && !loadedCars.isEmpty()){
+            switch (scania.getDirection()) {
+                case 0 -> loadedCars.peek().setPosition(new double[]{scania.getPosition()[0] - distance, scania.getPosition()[1]});
+                case 1 -> loadedCars.peek().setPosition(new double[]{scania.getPosition()[0], scania.getPosition()[1] - distance});
+                case 2 -> loadedCars.peek().setPosition(new double[]{scania.getPosition()[0] + distance, scania.getPosition()[1]});
+                case 3 -> loadedCars.peek().setPosition(new double[]{scania.getPosition()[0], scania.getPosition()[1] + distance});
+            }
+            loadedCars.peek().setCurrentlyLoaded(false);
+            loadedCars.pop();
+        }
+        else {
+            System.out.println("Platform is closed or there are no cars to unload");
+        }
     }
     public void openPlatform(){
         scania.openPlatform();
@@ -81,5 +102,4 @@ public class CarHauler extends Car implements Transporter, CanBeLoaded {
             }
         }
     }
-
 }

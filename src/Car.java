@@ -100,7 +100,6 @@ public abstract class Car implements Movable{ // the class can be abstract as ob
      * @return double
      */
     protected abstract double speedFactor();
-    // TODO probably change this comment
     /**
      * Increments speed
      * @param amount is speed to be increased
@@ -156,6 +155,14 @@ public abstract class Car implements Movable{ // the class can be abstract as ob
      * Set position
      */
     void setPosition(double[] position){ this.position = position;}
+    /**
+     * Get car loaded/ not loaded
+     */
+    boolean getCurrentlyLoaded(){ return currentlyLoaded; }
+    /**
+     * Set car loaded/not loaded
+     */
+    void setCurrentlyLoaded(Boolean bool){ this.currentlyLoaded = bool; }
     
     @Override
     public void move(){
