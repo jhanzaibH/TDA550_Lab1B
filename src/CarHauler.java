@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.util.Stack;
 
@@ -86,9 +85,15 @@ public class CarHauler extends Car implements CanBeLoaded {
             System.out.println("Platform is closed or there are no cars to unload");
         }
     }
+    /**
+     * Opens platform completely
+     */
     public void openPlatform(){
         scania.openPlatform();
     }
+    /**
+     * Closes platform completely
+     */
     public void closePlatform(){
         scania.closePlatform();
     }
