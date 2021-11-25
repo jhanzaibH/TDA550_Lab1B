@@ -13,7 +13,7 @@ public abstract class Car implements Movable{ // the class can be abstract as ob
     /** Engine power of the car */
     private final double enginePower; // Engine power of the car
     /** Current speed of tha car */
-    protected double currentSpeed; // The current speed of the car
+    private double currentSpeed; // The current speed of the car
     /** Color of the car */
     private Color color; // Color of the car
     /** Model name of the car */
@@ -86,6 +86,10 @@ public abstract class Car implements Movable{ // the class can be abstract as ob
         color = clr;
     }
     /**
+     * Set size of the car
+     */
+    public void setSize(int size){ this.size = size; }
+    /**
      * Starts the engine
      */
     public void startEngine(){
@@ -104,7 +108,7 @@ public abstract class Car implements Movable{ // the class can be abstract as ob
      * Increments speed
      * @param amount is speed to be increased
      */
-    protected void incrementSpeed(double amount){
+    private void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
@@ -122,7 +126,7 @@ public abstract class Car implements Movable{ // the class can be abstract as ob
      * Decrements speed
      * @param amount the speed is to be decreased
      */
-    protected void decrementSpeed(double amount){
+    private void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
     /**

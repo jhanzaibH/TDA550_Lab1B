@@ -6,11 +6,11 @@ public class Scania extends Car{
     /**
      * Degree that platform is lowered, between 0 and 70 degrees
      */
-    protected double platformDegree;
+    private double platformDegree;
     /**
      * Returns true if platform is closed
      */
-    protected boolean platformClosed;
+    private boolean platformClosed;
     /**
      * Creates a car of the type Saab95
      */
@@ -20,10 +20,7 @@ public class Scania extends Car{
         platformClosed = true;
         stopEngine();
     }
-    @Override
-    public void startEngine(){
-        if (platformClosed) { currentSpeed = 0.1; }
-    }
+
     @Override
     protected double speedFactor() {
         return getEnginePower()*0.01;
@@ -39,7 +36,7 @@ public class Scania extends Car{
      */
     public void heighten(Double degree){
         if (degree < 0){return;} // makes it impossible to heighten degree negatively
-        if (platformDegree-degree >= 0 && currentSpeed==0) {
+        if (platformDegree-degree >= 0 && getCurrentSpeed()==0) {
             platformDegree -= degree;
         } else { platformDegree = 0; }
         if (degree == 0) {
@@ -51,7 +48,7 @@ public class Scania extends Car{
      */
     public void lower(Double degree){
         if (degree < 0){return;} // makes it impossible to lower degree negatively
-        if (platformDegree+degree <= 70 && currentSpeed==0) {
+        if (platformDegree+degree <= 70 && getCurrentSpeed()==0) {
             platformDegree += degree;
         } else { platformDegree = 70; }
         if (degree != 0) {
@@ -69,12 +66,17 @@ public class Scania extends Car{
      * Opens platform completely
      */
     public void openPlatform(){
-        if (currentSpeed == 0) {
+        if (getCurrentSpeed() == 0) {
             platformDegree = 70;
             platformClosed = false;
         }
     }
-
+    /**
+     * returns true if platform is closed
+     */
+    public Boolean getPlatformClosed(){
+        return platformClosed;
+    }
     /**
      * Moves the car if the platform is closed
      */

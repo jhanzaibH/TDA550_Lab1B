@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 /**
@@ -9,7 +7,7 @@ public class Lab1B {
     /**
      * An arrayList of Car
      */
-    public static ArrayList<Car> carArrayList;
+    private static ArrayList<Car> carArrayList;
     /**
      * The main method
      * @param args is not used

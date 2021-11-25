@@ -3,8 +3,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class testCarHauler {
-    CarHauler carHauler = new CarHauler();
-    Saab95 saab95 = new Saab95();
+    private final CarHauler carHauler = new CarHauler();
+    private final Saab95 saab95 = new Saab95();
 
     @Test
     public void testLoadingMethods(){

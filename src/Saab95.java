@@ -3,7 +3,6 @@ import java.awt.*;
  * A class of a car Saab95
  */
 public class Saab95 extends Car {
-
     /**
      * Turbo
      */
@@ -21,7 +20,7 @@ public class Saab95 extends Car {
         turboOn = false;
         currentlyTransported = false;
         stopEngine();
-        size = 1000;
+        setSize(1000);
     }
 
     /**
@@ -36,7 +35,6 @@ public class Saab95 extends Car {
     public void setTurboOff(){
         turboOn = false;
     }
-
     /**
      * Gives true if turbo in on
      * @return boolean
@@ -50,15 +48,5 @@ public class Saab95 extends Car {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
-    }
-    
-    // stuff from Transportable interface
-    @Override
-    public boolean getCurrentlyTransported(){
-        return currentlyTransported;
-    }
-    @Override
-    public void setCurrentlyTransported(Boolean bool){
-        currentlyLoaded = bool;
     }
 }

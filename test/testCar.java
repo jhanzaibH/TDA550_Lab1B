@@ -1,12 +1,17 @@
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import java.awt.*;
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
 public class testCar {
-    Saab95 saab = new Saab95();
+    private Saab95 saab = new Saab95();
+    @Test
+    @Before
+    public void testStartEngine(){
+        saab.startEngine();
+        assertEquals(0.1, saab.getCurrentSpeed(),0.0);
+    }
     @Test
     public void testGetModelName(){
         assertEquals("Saab95", saab.getModelName());
@@ -24,7 +29,7 @@ public class testCar {
 
     @Test
     public void testGetCurrentSpeed(){
-        assertEquals(0, saab.getCurrentSpeed(),0.0);
+        assertEquals(0.1, saab.getCurrentSpeed(),0.0);
     }
 
     @Test
@@ -35,33 +40,23 @@ public class testCar {
     @Test
     public void testSetColor(){
         saab.setColor(Color.green);
-        assertEquals(0, saab.getCurrentSpeed(),0.0);
+        assertEquals(Color.green, saab.getColor());
     }
-
-    @Test
-    public void testStartEngine(){
-        saab.startEngine();
-        assertEquals(0.1, saab.getCurrentSpeed(),0.0);
-    }
-
     @Test
     public void testStopEngine(){
-        saab.startEngine();
         saab.stopEngine();
         assertEquals(0, saab.getCurrentSpeed(),0.0);
     }
     @Test
     public void testGas() {
-        saab.startEngine();
         double startSpeed = saab.getCurrentSpeed();
         saab.gas(0.5);
         assertEquals(startSpeed + saab.speedFactor() * 0.5, saab.getCurrentSpeed(),0.0);
     }
     @Test
     public void testBrake() {
-        saab.startEngine();
         saab.gas(0.9);
-        saab.decrementSpeed(0.4);
+        saab.brake(0.4);
         double decreasedSpeed = saab.getCurrentSpeed();
 
         saab.stopEngine();
@@ -76,31 +71,28 @@ public class testCar {
     }
     @Test
     public void testGetPosition(){
-        Volvo240 volvo = new Volvo240();
-        volvo.startEngine();
-        volvo.move();
-        assertEquals(0.1,volvo.getPosition()[0],0.0);
-        assertEquals(0.0,volvo.getPosition()[1],0.0);
+        saab.move();
+        assertEquals(0.1,saab.getPosition()[0],0.0);
+        assertEquals(0.0,saab.getPosition()[1],0.0);
     }
     @Test
     public void testMove(){
-        Volvo240 volvo = new Volvo240();
-        volvo.startEngine();
-        volvo.move();
-        assertEquals(0.1, volvo.getPosition()[0], 0.0);
-        assertEquals(0.0, volvo.getPosition()[1], 0.0);
-        volvo.turnLeft();
-        volvo.move();
-        assertEquals(0.1,volvo.getPosition()[0],0.0);
-        assertEquals(0.1,volvo.getPosition()[1],0.0);
-        volvo.turnLeft();
-        volvo.move();
-        assertEquals(0.0,volvo.getPosition()[0],0.0);
-        assertEquals(0.1,volvo.getPosition()[1],0.0);
-        volvo.turnLeft();
-        volvo.move();
-        assertEquals(0.0,volvo.getPosition()[0],0.0);
-        assertEquals(0.0,volvo.getPosition()[1],0.0);
+        saab.startEngine();
+        saab.move();
+        assertEquals(0.1, saab.getPosition()[0], 0.0);
+        assertEquals(0.0, saab.getPosition()[1], 0.0);
+        saab.turnLeft();
+        saab.move();
+        assertEquals(0.1,saab.getPosition()[0],0.0);
+        assertEquals(0.1,saab.getPosition()[1],0.0);
+        saab.turnLeft();
+        saab.move();
+        assertEquals(0.0,saab.getPosition()[0],0.0);
+        assertEquals(0.1,saab.getPosition()[1],0.0);
+        saab.turnLeft();
+        saab.move();
+        assertEquals(0.0,saab.getPosition()[0],0.0);
+        assertEquals(0.0,saab.getPosition()[1],0.0);
     }
     @Test
     public void testTurnLeft(){

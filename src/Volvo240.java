@@ -4,7 +4,6 @@ import java.awt.*;
  * A class of a car Volvo240.
  */
 public class Volvo240 extends Car {
-
     /**
      * The trim factor
      */
@@ -19,11 +18,10 @@ public class Volvo240 extends Car {
      */
     public Volvo240() {
         super(4,Color.black,100,"Volvo240");
-        currentlyLoaded = false;
+        setCurrentlyLoaded(false);
         stopEngine();
-        size = 1000;
+        setSize(1000);
     }
-
     /**
      * Returns trimFactor
      * @return double
@@ -35,14 +33,5 @@ public class Volvo240 extends Car {
     @Override
     protected double speedFactor() {
         return getEnginePower() * 0.01 * trimFactor;
-    }
-
-    @Override
-    public boolean getCurrentlyTransported(){
-        return currentlyLoaded;
-    }
-    @Override
-    public void setCurrentlyTransported(Boolean bool) {
-        currentlyLoaded = bool;
     }
 }

@@ -27,7 +27,7 @@ public class CarHauler extends Car implements CanBeLoaded {
         scania.closePlatform();
         loadedCars = new Stack<>();
         stopEngine();
-        size = 10000;
+        setSize(10000);
         maxCarSize = 1500;
     }
     @Override
@@ -52,7 +52,7 @@ public class CarHauler extends Car implements CanBeLoaded {
             System.out.println("The car is too heavy or is loaded somewhere else");
             return;
         }
-        if (distanceTo(car) < loadingDistance && !scania.platformClosed && car.size <= maxCarSize){
+        if (distanceTo(car) < loadingDistance && !scania.getPlatformClosed() && car.getSize() <= maxCarSize){
             loadedCars.add(car);
             car.setPosition(this.getPosition());
             car.setCurrentlyLoaded(true);
@@ -71,7 +71,7 @@ public class CarHauler extends Car implements CanBeLoaded {
     @Override
     public void unload(){
         int distance = 5;
-        if (!scania.platformClosed && !loadedCars.isEmpty()){
+        if (!scania.getPlatformClosed() && !loadedCars.isEmpty()){
             switch (scania.getDirection()) {
                 case 0 -> loadedCars.peek().setPosition(new double[]{scania.getPosition()[0] - distance, scania.getPosition()[1]});
                 case 1 -> loadedCars.peek().setPosition(new double[]{scania.getPosition()[0], scania.getPosition()[1] - distance});
@@ -100,7 +100,7 @@ public class CarHauler extends Car implements CanBeLoaded {
 
     @Override
     public void move() {
-        if (scania.platformClosed) {
+        if (scania.getPlatformClosed()) {
             scania.move();
             for (Car car : loadedCars) {
                 car.setPosition(this.getPosition());

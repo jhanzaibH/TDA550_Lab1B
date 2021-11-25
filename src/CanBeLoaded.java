@@ -11,7 +11,6 @@ public interface CanBeLoaded {
      * Load loadable thing
      */
     void load(Car car);
-
     /**
      * Unload loadable thing
      */
